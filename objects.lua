@@ -218,7 +218,7 @@ end)
 --
 -- An inventory list
 --
--- Parameters: location(?), name(?), x, y, width, height, start_at(?)
+-- Parameters: location(?), name(?), x, y, width, height, start_at(?), shift_click(?)
 --
 formspeclib.register_object('inventory', function(obj, safe_mode)
     if not obj.x or not obj.y or not obj.width or not obj.height then
@@ -235,6 +235,10 @@ formspeclib.register_object('inventory', function(obj, safe_mode)
         -- You are not allowed to use other locations in safe mode.
         return false
     end
+    local extra = ''
+    if shift_click then
+        extra = 'listring[' .. location .. ';' .. name .. ']'
+    end
     return 'list[' .. location .. ';' .. name .. ';' .. x .. ',' .. y .. ';' ..
-        w .. ',' .. h .. ';' .. start .. ']'
+        w .. ',' .. h .. ';' .. start .. ']' .. extra
 end)

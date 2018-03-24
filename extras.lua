@@ -19,6 +19,7 @@ formspeclib.register_object('formspeclib:player_inventory', function(obj, safe_m
         height = 1,
         location = 'current_player',
         name = 'main',
+        shift_click = true,
     },
     {
         type = 'inventory',
@@ -46,6 +47,7 @@ formspeclib.register_object('formspeclib:node_inventory', function(obj, safe_mod
         height = obj.height or 4,
         location = 'context',
         name = obj.name or 'main',
+        shift_click = true,
     }}
 end)
 
