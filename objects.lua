@@ -150,7 +150,7 @@ end)
 --   name = 'message',
 -- }
 formspeclib.register_object('textbox', function(obj, safe_mode)
-    if obj.x or not obj.y or not obj.width or not obj.name then
+    if not obj.x or not obj.y or not obj.width or not obj.name then
         return false
     end
     local x    = formspeclib.escape(obj.x)
