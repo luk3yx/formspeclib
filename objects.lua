@@ -183,7 +183,7 @@ end)
 --
 -- A combo box
 --
--- Parameters: x, y, width, height(?), name, label(?), default(?), password(?)
+-- Parameters: x, y, width, height(?), name, items, label(?), default(?)
 --
 formspeclib.register_object('combobox', function(obj, safe_mode)
     if not obj.x or not obj.y or not obj.width or not obj.name or not obj.items then

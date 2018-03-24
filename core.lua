@@ -43,6 +43,9 @@ formspeclib.render = function(formspec, safe_mode, no_iterations)
     else
         height = 0
     end
+    if type(no_iterations) ~= 'number' and no_iterations then
+        no_iterations = 1
+    end
     for i = 1, #formspec do
         if safe_mode and type(formspec[i]) ~= 'table' then
             return false
@@ -65,8 +68,15 @@ formspeclib.render = function(formspec, safe_mode, no_iterations)
             end
             if type(o) == 'string' then
                 compiled = compiled .. o
-            elseif type(o) == 'table' and not no_iterations then
-                o = formspeclib.render(o, safe_mode, safe_mode or no_iterations)
+            elseif type(o) == 'table' then
+                if no_iterations and no_iterations < 1 then return false end
+                local iter
+                if no_iterations then
+                    iter = no_iterations - 1
+                elseif safe_mode then
+                    iter = 3
+                end
+                o = formspeclib.render(o, safe_mode, iter)
                 if not o then return false end
                 compiled = compiled .. o
             else
