@@ -52,27 +52,31 @@ end)
 --
 -- formspeclib:chest - Most useful with chest touchscreens.
 --
--- Syntax: width(?), height(?)
+-- Syntax: x(?), y(?), width(?), height(?)
 --
 formspeclib.register_object('formspeclib:chest', function(obj, safe_mode)
+    local r = not obj.x and not obj.y
+    
+    if type(obj.x) ~= 'number' then obj.x = 0 end
+    if type(obj.y) ~= 'number' then obj.y = 0 end
     if type(obj.width) ~= 'number' then obj.width = 8 end
     if type(obj.height) ~= 'number' then obj.height = 4 end
     
     return {
-    width = obj.width,
-    height = obj.height + 5,
-    {
-        type = 'formspeclib:node_inventory',
-        x = 0,
-        y = 0.3,
-        width = obj.width,
-        height = obj.height,
-        name = obj.name,
-    },
-    {
-        type = 'formspeclib:player_inventory',
-        x = (obj.width / 2) - 4,
-        y = obj.height + 0.82,
-    },
+        width = r and obj.width,
+        height = r and obj.height + 5,
+        {
+            type = 'formspeclib:node_inventory',
+            x = obj.x,
+            y = obj.y + 0.3,
+            width = obj.width,
+            height = obj.height,
+            name = obj.name,
+        },
+        {
+            type = 'formspeclib:player_inventory',
+            x = obj.x + (obj.width / 2) - 4,
+            y = obj.y + obj.height + 0.82,
+        },
     }
 end)
