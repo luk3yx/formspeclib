@@ -236,7 +236,7 @@ formspeclib.register_object('inventory', function(obj, safe_mode)
         return false
     end
     local extra = ''
-    if shift_click then
+    if obj.shift_click then
         extra = 'listring[' .. location .. ';' .. name .. ']'
     end
     return 'list[' .. location .. ';' .. name .. ';' .. x .. ',' .. y .. ';' ..
