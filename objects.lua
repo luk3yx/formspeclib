@@ -242,3 +242,41 @@ formspeclib.register_object('inventory', function(obj, safe_mode)
     return 'list[' .. location .. ';' .. name .. ';' .. x .. ',' .. y .. ';' ..
         w .. ',' .. h .. ';' .. start .. ']' .. extra
 end)
+
+--
+-- A container
+--
+-- Parameters: x, y, children
+--
+-- each element inside the container is offset by the x and y
+--
+formspeclib.register_object('container', function(obj, safe_mode)
+    return {
+        {
+            type = 'formspeclib:container_start',
+            x = formspeclib.escape(obj.x or 0),
+            y = formspeclib.escape(obj.y or 0),
+        },
+        (table.unpack or unpack)(obj),
+        {
+            type = 'formspeclib:container_end'
+        }
+    }
+end)
+
+formspeclib.register_object('formspeclib:container_start', function(obj, safe_mode)
+    if not obj.x or not obj.y then
+        return false
+    end
+    local x         = formspeclib.escape(obj.x)
+    local y         = formspeclib.escape(obj.y)
+    
+    obj.x = nil
+    obj.y = nil
+    
+    return 'container[' .. x .. ',' .. y .. ']'
+end)
+
+formspeclib.register_object('formspeclib:container_end', function(obj, safe_mode)
+    return 'container_end[]'
+end)
