@@ -248,20 +248,19 @@ end)
 --
 -- Parameters: x, y, children
 --
--- each element inside the container is offset by the x and y
+-- Each element inside the container is offset by the x and y
 --
 formspeclib.register_object('container', function(obj, safe_mode)
-    return {
+    local t = {
         {
             type = 'formspeclib:container_start',
             x = formspeclib.escape(obj.x or 0),
             y = formspeclib.escape(obj.y or 0),
         },
-        (table.unpack or unpack)(obj),
-        {
-            type = 'formspeclib:container_end'
-        }
+        (table.unpack or unpack)(obj)
     }
+    table.insert(t, {type = 'formspeclib:container_end'})
+    return t
 end)
 
 formspeclib.register_object('formspeclib:container_start', function(obj, safe_mode)
