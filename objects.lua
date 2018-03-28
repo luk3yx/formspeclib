@@ -244,6 +244,33 @@ formspeclib.register_object('inventory', function(obj, safe_mode)
 end)
 
 --
+-- A semitransparent box
+--
+-- Parameters: x, y, width, height, colour/color 
+--
+-- Example 'box[1,1;1,1;black]':
+-- {
+--   type = 'image',
+--   x = 1,
+--   y = 1,
+--   width = 1,
+--   height = 1,
+--   colour = 'black'
+-- }
+formspeclib.register_object('box', function(obj, safe_mode)
+    if (not obj.colour and not obj.color) or not obj.x or not obj.y then
+        return false
+    end
+    local x      = formspeclib.escape(obj.x)
+    local y      = formspeclib.escape(obj.y)
+    local width  = formspeclib.escape(obj.width  or obj.height or 4)
+    local height = formspeclib.escape(obj.height or obj.width  or 4)
+    local colour = formspeclib.escape(obj.colour or obj.color)
+    return 'box[' .. x  .. ',' .. y .. ';' .. width .. ',' .. height .. ';' ..
+        colour .. ']'
+end)
+
+--
 -- A container
 --
 -- Parameters: x, y, children
