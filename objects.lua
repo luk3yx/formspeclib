@@ -58,8 +58,9 @@ formspeclib.register_object('text', function(obj, safe_mode)
         local width  = formspeclib.escape(obj.width  or 8)
         local height = formspeclib.escape(obj.height or 0.5)
         return 'image_button[' .. x .. ',' .. y .. ';' .. width .. ',' ..
-          height .. ';' .. formspeclib.escape('default_dirt.png^[colorize:#343434') .. ';formspeclib:ignore;' ..
-            text .. ']'
+          height .. ';' ..
+            formspeclib.escape('default_dirt.png^[colorize:#343434') ..
+            ';formspeclib:ignore;' .. text .. ']'
     elseif obj.align == 'vertical' then
         return 'vertlabel[' .. x  .. ',' .. y .. ';' .. text .. ']'
     else
@@ -88,7 +89,8 @@ formspeclib.register_object('image', function(obj, safe_mode)
     local width  = formspeclib.escape(obj.width  or obj.height or 1)
     local height = formspeclib.escape(obj.height or obj.width  or 1)
     local image  = formspeclib.escape(obj.image)
-    return 'image[' .. x  .. ',' .. y .. ';' .. width .. ',' .. height .. ';' .. image .. ']'
+    return 'image[' .. x  .. ',' .. y .. ';' .. width .. ',' .. height .. ';' ..
+        image .. ']'
 end)
 
 --
@@ -131,7 +133,8 @@ formspeclib.register_object('button', function(obj, safe_mode)
             t = 'item_' .. t
         end
     end
-    return t .. '[' .. x .. ',' .. y .. ';' .. w .. ',' .. h .. img .. ';' .. name .. ';' .. text .. ']'
+    return t .. '[' .. x .. ',' .. y .. ';' .. w .. ',' .. h .. img .. ';' ..
+        name .. ';' .. text .. ']'
 end)
 
 --
@@ -177,7 +180,13 @@ formspeclib.register_object('textbox', function(obj, safe_mode)
         def = ''
       end
     end
-    return t .. '[' .. x .. ',' .. y .. ';' .. w .. ',' .. h .. ';' .. name .. ';' .. l .. def .. ']'
+    if not obj.close_on_enter and obj.close_on_enter ~= nil then
+        if t == 'field' then
+            def = def .. ']field_close_on_enter[' .. name .. ';false'
+        end
+    end
+    return t .. '[' .. x .. ',' .. y .. ';' .. w .. ',' .. h .. ';' .. name ..
+        ';' .. l .. def .. ']'
 end)
 
 --
@@ -212,7 +221,8 @@ formspeclib.register_object('combobox', function(obj, safe_mode)
         h = 2
         t = 'dropdown'
     end
-    return t .. '[' .. x .. ',' .. y .. ';' .. w .. ',' .. h .. ';' .. name .. ';' .. l .. def .. ']'
+    return t .. '[' .. x .. ',' .. y .. ';' .. w .. ',' .. h .. ';' .. name ..
+        ';' .. l .. def .. ']'
 end)
 
 --
