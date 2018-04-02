@@ -88,6 +88,9 @@ formspeclib.render = function(formspec, safe_mode, no_iterations)
         end
     end
     if width > 0 and height > 0 then
+        -- The below three lines are here to ensure compatibility with Minetest
+        --   0.4.X. When the variables are removed from minetest_game they will
+        --   simply be ignored by the mod.
         if default and default.gui_bg and default.gui_bg_img and default.gui_slots then
             compiled = default.gui_bg .. default.gui_bg_img .. default.gui_slots .. compiled
         end
