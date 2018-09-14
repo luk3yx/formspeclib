@@ -58,12 +58,12 @@ end)
 --
 formspeclib.register_object('formspeclib:chest', function(obj, safe_mode)
     local r = not obj.x and not obj.y
-    
+
     if type(obj.x) ~= 'number' then obj.x = 0 end
     if type(obj.y) ~= 'number' then obj.y = 0 end
     if type(obj.width) ~= 'number' then obj.width = 8 end
     if type(obj.height) ~= 'number' then obj.height = 4 end
-    
+
     return {
         width = r and obj.width,
         height = r and obj.height + 5,

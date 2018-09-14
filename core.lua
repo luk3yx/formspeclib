@@ -15,7 +15,7 @@ formspeclib.version = 0.1
 
 --
 -- formspeclib.render(): Renders a formspeclib object into a formspec.
--- 
+--
 -- Syntax: formspeclib.render(formspeclib_object, safe_mode, no_iterations)
 --
 --  formspeclib_object: The formspeclib object to render.

@@ -71,7 +71,7 @@ end)
 --
 -- An image
 --
--- Parameters: x, y, width(?), height(?), image 
+-- Parameters: x, y, width(?), height(?), image
 --
 -- Example 'image[1,1;1,1;default_dirt.png]':
 -- {
@@ -256,7 +256,7 @@ end)
 --
 -- A semitransparent box
 --
--- Parameters: x, y, width, height, colour/color 
+-- Parameters: x, y, width, height, colour/color
 --
 -- Example 'box[1,1;1,1;black]':
 -- {
@@ -306,10 +306,10 @@ formspeclib.register_object('formspeclib:container_start', function(obj, safe_mo
     end
     local x         = formspeclib.escape(obj.x)
     local y         = formspeclib.escape(obj.y)
-    
+
     obj.x = nil
     obj.y = nil
-    
+
     return 'container[' .. x .. ',' .. y .. ']'
 end)
 
